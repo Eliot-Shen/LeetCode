@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        int last[26];
+        int length = s.size();
+        for(int i=0;i<length;i++){
+            last[s[i]-'a'] = i;
+        }
+        vector<int> partition;
+        int start = 0;
+        int end = 0;
+        for(int i=0;i<length;i++){
+            end = max(last[s[i]-'a'],end);
+            if(i == end){
+                partition.push_back(end - start + 1);
+                start = end + 1;
+            }
+        }
+        return partition;
+    }
+};
